@@ -1,19 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('bootstrap.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {# Run composer require symfony/webpack-encore-bundle to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">9ach.tn</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+                    <a id="lien-produit" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produit
+                    </a>
+                    <div class="dropdown-menu" style="background-color: #1a2530" aria-labelledby="navbarDropdown">
+                        <a id="ajouter-produit" class="dropdown-item" href="{{ path('app_ajouter') }}">Ajouter un produit</a>
+                        <a id="lister-produits" class="dropdown-item" href="{{ path('app_produit-lister') }}">Lister les produits</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategorie" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorie
+                    </a>
+                    <div class="dropdown-menu" style="background-color: #1a2530" aria-labelledby="navbarDropdownCategorie">
+                        <a class="dropdown-item" href="{{ path('lister-cat') }}">Lister les catégories</a>
+                        <a class="dropdown-item" href="{{ path('app_ajouter-cat') }}">Ajouter une catégorie</a>
+                    </div>
+                </li>
+            </ul>
+
+
+            <!-- Logout button with icon -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-sign-out-alt" style="color: white;"></i> <!-- Apply white color style to the icon -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+{% block body %}{% endblock %}
+
+
+
+</body>
 </html>

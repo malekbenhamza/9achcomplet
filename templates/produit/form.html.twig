@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.qteStock) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.img) }}
+        {{ form_row(form.categorie) }}
+
+        <div class="form-group-inline">
+                {{ form_widget(form.envoyer) }}
+                {{ form_widget(form.annuler) }}
+        </div>
+
+        {{ form_end(form) }}
+
+
+{% endblock %}

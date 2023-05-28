@@ -1,0 +1,61 @@
+{% include 'home/navbar2.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">Cart</h1>
+        {% if datapanier is empty %}
+            <div class="alert alert-info" role="alert">
+                Your cart is empty.
+            </div>
+        {% else %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in datapanier %}
+                    {% set product = item.produit %}
+                    {% set totalPrice = product.prix * item.qte %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ product.nom }}</td>
+                        <td><img src="{{ product.img }}" alt="{{ product.nom }}" width="50"></td>
+                        <td>{{ product.prix }}</td>
+                        <td>
+                            <input type="number" value="{{ item.qte }}" min="1" name="quantity" class="form-control">
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ path('cart-add2', {'id': product.id}) }}" class="btn btn-primary"><i class="bi bi-plus"></i></a>
+                                <a href="{{ path('cart-remove', {'id': product.id}) }}" class="btn btn-secondary"><i class="bi bi-dash"></i></a>
+                                <a href="{{ path('cart-removerow', {'id': product.id}) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">Your cart is empty.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td>Total:</td>
+                    <td class="text-end">{{ total }}</td>
+                </tr>
+                </tfoot>
+            </table>
+        {% endif %}
+    </div>
+    {{ totalProducts }}
+{% endblock %}

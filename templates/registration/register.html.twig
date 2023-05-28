@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bootstrap.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+{% include 'home/navbar2.html.twig' %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="display-4 text-center mb-4">Register</h1>
+
+                    {{ form_start(registrationForm) }}
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email, 'Email') }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.tel, 'Telephone') }}
+                        {{ form_widget(registrationForm.tel, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.nom, 'Nom') }}
+                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.prenom, 'Prénom') }}
+                        {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.adresse, 'Adresse') }}
+                        {{ form_widget(registrationForm.adresse, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Password') }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, 'I agree to the terms', {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

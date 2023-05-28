@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Categories</h1>
+
+
+
+    <table class="table" style="border: 1px solid black; border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th style="border: 1px solid black;">Id</th>
+            <th style="border: 1px solid black;">Libelle</th>
+            <th style="border: 1px solid black;">Action</th>
+
+
+        </tr>
+        </thead>
+        {% for ct in categories %}
+            <tr>
+                <td style="border: 1px solid black;">{{ ct.id }}</td>
+                <td style="border: 1px solid black;">{{ ct.nom }}</td>
+
+                <td>
+
+                    <a href="{{ path('app_modifier-cat', {'id': ct.id}) }}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <a href="{{ path('supp-cat', {'id': ct.id}) }}" class="btn btn-danger"
+                       onclick="return confirm('Voulez-vous vraiment supprimer cette categorie ?')">
+                        <i class="fas fa-trash-alt"></i> Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button class="btn btn-primary">
+        <a href="{{ path('app_ajouter-cat') }}" style="text-decoration: none; color: inherit;">
+            Ajouter une categorie
+        </a>
+    </button>
+{% endblock %}

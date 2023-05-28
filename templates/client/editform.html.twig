@@ -1,0 +1,41 @@
+
+{% block body %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center">Edit User</h3>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.tel, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            {{ form_row(form._token) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

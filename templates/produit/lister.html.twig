@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Liste des produits</h1>
+
+        {{ form_start(form) }}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Libellé</th>
+                <th>Description</th>
+                <th>Quantité en stock</th>
+                <th>Prix</th>
+                <th>Image</th>
+                <th>Catégorie</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for prd in produits %}
+                <tr>
+                    <td>{{ prd.nom }}</td>
+                    <td>{{ prd.description }}</td>
+                    <td>{{ prd.qtestock }}</td>
+                    <td>{{ prd.prix }}</td>
+                    <td><img src="{{ prd.img }}" style="width: 100px; height: 100px;" alt="Product Image"></td>
+                    <td>{{ prd.categorie.nom }}</td>
+                    <td>
+                        <a href="{{ path('app_produit_detail', {'id': prd.id}) }}" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                        <a href="{{ path('app_modifier-produit', {'id': prd.id}) }}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Modifier
+                        </a>
+                        <a href="{{ path('app_produit_supprimer', {'id': prd.id}) }}" class="btn btn-danger"
+                           onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
+                            <i class="fas fa-trash-alt"></i> Supprimer
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a href="{{ path('app_ajouter') }}" class="btn btn-primary">
+                Ajouter un produit
+            </a>
+        </div>
+    </div>
+{% endblock %}
