@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Liste des commandes</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Client</th>
+
+                <th>Produit</th>
+                <th >Quantité commandée</th>
+                <th>date de commande</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for commande in commandes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ commande.user.nom }} {{ commande.user.prenom }}</td>
+
+                    <td>{{ commande.produit.nom }} </td>
+                    <td >{{ commande.qte }}</td>
+                    <td>{{ commande.datecommande|date('Y-m-d') }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -15,14 +15,13 @@
     {% endblock %}
 
     {% block javascripts %}
-
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">9ach.tn</a>
+        <a class="navbar-brand" href="{{ path('app_home') }}">9ach.tn</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,13 +45,17 @@
                         <a class="dropdown-item" href="{{ path('app_ajouter-cat') }}">Ajouter une catégorie</a>
                     </div>
                 </li>
-            </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_liste-commandes') }}">Commandes</a>
+                </li>
+                <li class="nav-item">
 
+            </ul>
 
             <!-- Logout button with icon -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ path('app_logout') }}">
                         <i class="fas fa-sign-out-alt" style="color: white;"></i> <!-- Apply white color style to the icon -->
                     </a>
                 </li>
@@ -61,11 +64,7 @@
     </div>
 </nav>
 
-
-
 {% block body %}{% endblock %}
-
-
 
 </body>
 </html>

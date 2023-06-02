@@ -82,18 +82,17 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Check if the password field is filled
-            if ($form->get('password')->getData()) {
-                // Hash the new password
-                $hashedPassword = $passwordHasher->hashPassword($client, $form->get('password')->getData());
-                // Set the hashed password on the client entity
-                $client->setPassword($hashedPassword);
-            }
+            $client = $form->getData();
 
             $em = $doctrine->getManager();
+            $em->persist($client);
             $em->flush();
+            return $this->redirectToRoute('app_client_detail', ['id' => $client->getId()]);
 
-            return new Response("Modification client avec succès");
         }
+
+
+
 
         return $this->render('client/editform.html.twig', ['form' => $form->createView()]);
     }

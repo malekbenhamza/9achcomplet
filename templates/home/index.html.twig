@@ -44,6 +44,12 @@
     <link href="{{ asset('assets/styles.css') }}" rel="stylesheet" />
 </head>
 <body>
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
 <!-- Navigation-->
 {% include 'home/navbar2.html.twig' %}
 <!-- Header-->
@@ -51,7 +57,7 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With 9ACH.TN</p>
+            <p  class="lead fw-normal text-white-60 mb-0">With 9ACH.TN</p>
         </div>
     </div>
 </header>

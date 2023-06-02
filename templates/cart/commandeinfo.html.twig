@@ -1,0 +1,121 @@
+{% include 'home/navbar2.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .checkout-container {
+            margin-top: 50px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .product-table {
+            margin-bottom: 20px;
+        }
+
+        .user-info-card {
+            margin-bottom: 20px;
+        }
+
+        .total-price-card {
+            text-align: center;
+        }
+
+        .total-price-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .total-price-value {
+            font-size: 24px;
+        }
+
+        .valider-commande-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="checkout-container">
+            <h1 class="checkout-title">Order Summary</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card product-table">
+                        <div class="card-body">
+                            <h3 class="card-title">Products</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for comm in commandes %}
+                                        <tr>
+                                            <td>{{ comm.produit.nom }}</td>
+                                            <td>{{ comm.qte }}</td>
+                                            <td>{{ comm.produit.prix * comm.qte }}DT</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card user-info-card">
+                        <div class="card-body">
+                            <h3 class="card-title">User Information</h3>
+                            <ul class="list-unstyled">
+                                <li><strong>Name:</strong> {{ app.user.nom }}</li>
+                                <li><strong>Last Name:</strong> {{ app.user.prenom }}</li>
+                                <li><strong>Address:</strong> {{ app.user.adresse }}</li>
+                                <li><strong>Tel:</strong> {{ app.user.tel }}</li>
+                                <li> <a class="nav-link text-white" href="{{ path('app_client_detail', {'id': app.user.id }) }}">
+                                  <button class="btn-secondary" >Modifier</button>  </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card total-price-card">
+                <div class="card-body">
+                    <h3 class="total-price-label">Total Price</h3>
+                    <h4 class="total-price-value">{{ total }}DT</h4>
+                </div>
+            </div>
+            <div class="valider-commande-btn">
+                <button class="btn btn-primary" type="button" onclick="validateCart()">Valider Commande</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateCart() {
+            if (confirm("Would you really want to validate your cart?")) {
+                window.location.href = "{{ path('cart-valider') }}";
+            }
+        }
+    </script>
+{% endblock %}

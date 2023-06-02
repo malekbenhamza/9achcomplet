@@ -28,15 +28,9 @@ class UserType2Type extends AbstractType
             ])
             ->add('tel')
             ->add('adresse')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'required' => false,
-                'first_options'  => ['label' => 'New Password'],
-                'second_options' => ['label' => 'Repeat Password'],
-            ])
-            ->add('sumbit', SubmitType::class, [
-                'label' => 'Save',
+
+            ->add('envoyer', SubmitType::class, [
+                'label' => 'envoyer',
             ])
         ;
     }

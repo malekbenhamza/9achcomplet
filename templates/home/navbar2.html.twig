@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>9ach.TN</title>
@@ -10,21 +10,21 @@
     <link href="{{ asset('assets/styles.css') }}" rel="stylesheet" />
 </head>
 <body>
-<script src="assets/scripts.js"></script>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">9ACH.TN</a>
+        <a class="navbar-brand text-white" href="{{ path('app_home') }}">9ACH.TN</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
+                    <a class="nav-link active text-white" aria-current="page" href="{{ path('app_home') }}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Shop
+                    </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item" href="{{ path('app_home-listerall') }}">All Products</a>
@@ -33,63 +33,58 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ path('lister-cat-id', {'id': 1}) }}">homme</a>
+                            <a class="dropdown-item" href="{{ path('lister-cat-id', {'id': 1}) }}">Homme</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ path('lister-cat-id', {'id': 2}) }}">femme</a>
+                            <a class="dropdown-item" href="{{ path('lister-cat-id', {'id': 2}) }}">Femme</a>
                         </li>
                     </ul>
                 </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
                 {% if app.user %}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('app_produit-lister') }}">
+                                <i class="bi bi-gear-fill"></i>  Access Admin
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">
+                        <a class="nav-link text-white" href="{{ path('app_logout') }}">
                             <i class="bi bi-box-arrow-right"></i> Logout
                         </a>
                     </li>
-              <a href="{{ path('app_client_detail', {'id':app.user.id }) }}">
-                  <li class="nav-item">
-                        <span class="nav-link">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_client_detail', {'id': app.user.id }) }}">
                             <i class="bi bi-person"></i> Welcome, {{ app.user.nom }}
-                        </span>
-                  </li>
-              </a>
+                        </a>
+                    </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">
+                        <a class="nav-link text-white" href="{{ path('app_login') }}">
                             <i class="bi bi-box-arrow-in-right"></i> Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">
+                        <a class="nav-link text-white" href="{{ path('app_register') }}">
                             <i class="bi bi-person-plus"></i> Sign Up
                         </a>
                     </li>
                 {% endif %}
-            </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
-                    <a href="{{ path('cart-show') }}" style="text-decoration: none; color: inherit;">
-                        <i class="bi-cart-fill me-1"></i>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('cart-show') }}">
+                        <i class="bi-cart-fill"></i>
                         Cart
-                        {% if totalProducts is defined %}
-                            {% if totalProducts > 0 %}
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">{{ totalProducts }}</span>
-                            {% endif %}
-                        {% else %}
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        {% if totalProducts is defined and totalProducts > 0 %}
+                            <span class="badge bg-danger rounded-pill">{{ totalProducts }}</span>
                         {% endif %}
                     </a>
-                </button>
-
-            </form>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-
 </body>
 </html>

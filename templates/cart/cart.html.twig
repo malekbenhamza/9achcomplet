@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="mb-4">Cart</h1>
+        <h1 class="mt-4 mb-4">Cart</h1>
         {% if datapanier is empty %}
             <div class="alert alert-info" role="alert">
                 Your cart is empty.
@@ -18,6 +18,7 @@
                     <th scope="col">Image</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -29,10 +30,11 @@
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ product.nom }}</td>
                         <td><img src="{{ product.img }}" alt="{{ product.nom }}" width="50"></td>
-                        <td>{{ product.prix }}</td>
+                        <td>{{ product.prix }}DT</td>
                         <td>
-                            <input type="number" value="{{ item.qte }}" min="1" name="quantity" class="form-control">
+                            <input type="number" value="{{ item.qte }}" min="1" name="quantity" class="form-control" readonly>
                         </td>
+                        <td>{{ totalPrice }}DT</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="{{ path('cart-add2', {'id': product.id}) }}" class="btn btn-primary"><i class="bi bi-plus"></i></a>
@@ -43,19 +45,18 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="6" class="text-center">Your cart is empty.</td>
+                        <td colspan="7">No items in the cart</td>
                     </tr>
                 {% endfor %}
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="4"></td>
-                    <td>Total:</td>
-                    <td class="text-end">{{ total }}</td>
-                </tr>
-                </tfoot>
             </table>
+            <div class="text-end">
+                <h3>Total: {{ total }}DT</h3>
+            </div>
+            <div class="text-center">
+                <a href="{{ path('cart-checkout') }}" class="btn btn-success">Checkout</a>
+                <a href="{{ path('cart-delete') }}" class="btn btn-danger">Delete Cart</a>
+            </div>
         {% endif %}
     </div>
-    {{ totalProducts }}
 {% endblock %}
